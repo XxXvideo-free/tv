@@ -1,153 +1,165 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>freeteens</title>
-    <link href="trafors.css" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            font-family: 'Arial', sans-serif;
-            background-color: #181818; /* Темный фон */
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>freeteens</title>
+  <meta name="generator" content="WYSIWYG Web Builder 18 - https://www.wysiwygwebbuilder.com">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #000;
+      color: #fff;
+    }
 
-        #container {
-            max-width: 100%;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            background: #2c2c2c; /* Темный контейнер */
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 50px; /* Отступ сверху */
-        }
+    #container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #f8f8f8;
-        }
+    #takeTest {
+      color: yellow;
+      font-size: 24px;
+      margin: 20px 0;
+    }
 
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: yellow; /* Желтый цвет для основного текста */
-            line-height: 1.5;
-        }
+    #instructions {
+      color: red;
+      font-size: 20px;
+      margin: 10px 0;
+      display: none;
+    }
 
-        .image-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 30px;
-            width: 100%;
-            overflow: hidden;
-        }
+    #getOffer {
+      color: white;
+      font-size: 18px;
+      margin: 10px 0;
+    }
 
-        .image-container img {
-            width: 100%; /* Заполняет всю ширину контейнера */
-            height: auto; /* Сохраняет пропорции изображения */
-        }
+    img {
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
 
-        a img {
-            width: 250px;
-            height: auto;
-            margin-top: 20px;
-        }
+    #startButton {
+      background-color: yellow;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
 
-        /* Медиазапросы для разных экранов */
-        @media (max-width: 1200px) {
-            #container {
-                padding: 20px;
-            }
+    #startButton:hover {
+      background-color: orange;
+    }
 
-            a img {
-                width: 220px;
-            }
+    /* Увеличенный текст для мобильной версии */
+    @media (max-width: 600px) {
+      #takeTest {
+        font-size: 24px;
+      }
 
-            .image-container img {
-                width: 90%;
-            }
+      #instructions {
+        font-size: 16px;
+      }
 
-            h1 {
-                font-size: 2rem; /* Уменьшаем размер заголовка */
-            }
+      #getOffer {
+        font-size: 20px;
+      }
 
-            p {
-                font-size: 1rem; /* Уменьшаем размер текста */
-            }
-        }
+      #startButton {
+        font-size: 16px;
+      }
+    }
+  </style>
+  <script>
+    // Переводы для Tier 1, 2 и 3 языков
+    const translations = {
+      en: {
+        takeTest: "TAKE A SHORT TEST",
+        instructions: "THE VIDEO WILL RUN AFTER THE TEST.",
+        getOffer: "The video will start automatically on the “Thank You!” page.",
+        startButton: "START TEST"
+      },
+      ru: {
+        takeTest: "ПРОЙДИТЕ КОРОТКИЙ ТЕСТ",
+        instructions: "ВИДЕО ЗАПУСТИТСЯ ПОСЛЕ ТЕСТА.",
+        getOffer: "Видео начнётся автоматически на странице «Спасибо!».",
+        startButton: "НАЧАТЬ ТЕСТ"
+      },
+      es: {
+        takeTest: "REALIZA UNA PRUEBA CORTA",
+        instructions: "EL VIDEO SE REPRODUCIRÁ DESPUÉS DE LA PRUEBA.",
+        getOffer: "El video se iniciará automáticamente en la página de “Gracias!”.",
+        startButton: "COMENZAR PRUEBA"
+      },
+      // Добавить остальные переводы...
+    };
 
-        @media (max-width: 768px) {
-            #container {
-                padding: 15px;
-            }
+    // Установка языка
+    function setLanguage() {
+      const userLang = navigator.language.slice(0, 2); // Первые две буквы языка
+      const lang = translations[userLang] ? userLang : 'en'; // Если язык неизвестен, использовать английский
 
-            a img {
-                width: 200px;
-            }
+      document.getElementById('takeTest').textContent = translations[lang].takeTest;
+      document.getElementById('instructions').textContent = translations[lang].instructions;
+      document.getElementById('getOffer').textContent = translations[lang].getOffer;
+      document.getElementById('startButton').textContent = translations[lang].startButton;
+    }
 
-            .image-container img {
-                width: 90%;
-            }
+    // Показать текст после клика
+    function showInstructions() {
+      document.getElementById('instructions').style.display = 'block';
+    }
 
-            h1 {
-                font-size: 1.8rem; /* Уменьшаем размер заголовка */
-            }
+    // Функция для редиректа по типу устройства
+  function redirectToDeviceLink() {
+    const androidLink = "https://oojaishaibak.net/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
+    const iosLink = "https://oojaishaibak.net/link?z=5753412&var={SOURCE_ID}&ymid={CLICK_ID}";
+    const desktopLink = "https://oojaishaibak.net/link?z=6488869&var={SOURCE_ID}&ymid={CLICK_ID}";
 
-            p {
-                font-size: 0.9rem; /* Уменьшаем размер текста */
-            }
-        }
+      if (/Android/i.test(navigator.userAgent)) {
+        window.open(androidLink, "_blank");
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.open(iosLink, "_blank");
+      } else {
+        window.open(desktopLink, "_blank");
+      }
+    }
 
-        @media (max-width: 480px) {
-            #container {
-                padding: 10px;
-            }
-
-            a img {
-                width: 180px; /* Уменьшаем размер кнопки */
-            }
-
-            .image-container img {
-                width: 100%;
-            }
-
-            h1 {
-                font-size: 1.5rem; /* Уменьшаем размер заголовка */
-            }
-
-            p {
-                font-size: 0.8rem; /* Уменьшаем размер текста */
-            }
-        }
-    </style>
+    // Инициализация при загрузке страницы
+    window.onload = function () {
+      setLanguage();
+      document.getElementById('Image2').onclick = redirectToDeviceLink;
+      document.getElementById('Image3').onclick = showInstructions;
+      document.getElementById('startButton').onclick = redirectToDeviceLink;
+    };
+  </script>
 </head>
 <body>
-<div id="container">
-    <!-- Изображение xvideo.png в самом верху -->
-    <div class="image-container">
-        <img src="xvideo.png" alt="Xvideo" />
+  <div id="container">
+    <div id="wb_Text1">
+      <p id="takeTest">TAKE A SHORT TEST</p>
     </div>
-
-    <!-- Заголовок и описание -->
-    <h1>Доступ к видео после простой регистрации</h1>
-    <p>Зарегистрируйтесь без необходимости подтверждения по электронной почте и получите немедленный доступ к видео!</p>
-    
-    <!-- Кнопка с изображением -->
-    <a href="https://avzqa.imitrkn.net/?utm_source=95373a9daf4cb6a2&s1=48854&s2=209775" target="_blank">
-        <img src="join.png" alt="Join Now" />
-    </a>
-</div>
+    <div>
+      <img src="images/test2.png" id="Image2" alt="Test Image">
+    </div>
+    <div>
+      <img src="images/xvideo.png" id="Image3" alt="Video Image">
+    </div>
+    <div>
+      <p id="instructions">THE VIDEO WILL RUN AFTER THE TEST.</p>
+      <p id="getOffer">The video will start automatically on the “Thank You!” page.</p>
+    </div>
+    <button id="startButton">START TEST</button>
+  </div>
 </body>
 </html>
